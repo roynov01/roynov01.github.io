@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Your Name – Personal Site</title>
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+  <!-- Font Awesome for icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-+CbDv6MySfyZB9" crossorigin="anonymous" />
+  <style>
+    :root {
+      --primary: #1e88e5;
+      --bg: #f8f9fa;
+      --text: #212529;
+    }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      scroll-behavior: smooth;
+      font-family: 'Open Sans', sans-serif;
+    }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+    header {
+      background: #fff;
+      padding: 1rem 2rem;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 1rem;
+    }
+    nav a {
+      color: var(--text);
+      text-decoration: none;
+      font-weight: 600;
+      padding: 0.5rem 1rem;
+      border-radius: 0.25rem;
+      transition: background 0.2s;
+    }
+    nav a:hover {
+      background: var(--primary);
+      color: #fff;
+    }
+    section {
+      max-width: 1000px;
+      margin: 4rem auto;
+      padding: 0 2rem;
+    }
+    h1, h2 {
+      margin-bottom: 1rem;
+      color: var(--primary);
+    }
+    .profile-img {
+      width: 200px;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 50%;
+      border: 4px solid var(--primary);
+      margin-bottom: 1rem;
+    }
+    .socials {
+      margin-top: 1rem;
+      display: flex;
+      gap: 1rem;
+    }
+    .socials a {
+      font-size: 1.5rem;
+      color: var(--text);
+      transition: color 0.2s;
+    }
+    .socials a:hover {
+      color: var(--primary);
+    }
+    footer {
+      margin: 4rem 0;
+      text-align: center;
+      font-size: 0.9rem;
+      color: #777;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <nav>
+    <div class="logo"><strong>Your&nbsp;Name</strong></div>
+    <ul>
+      <li><a href="#about">About</a></li>
+      <li><a href="#research">Research</a></li>
+      <li><a href="#publications">Publications</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main>
+  <section id="about">
+    <h2>About</h2>
+    <img src="images/profile.jpg" alt="Profile photo" class="profile-img">
+    <p>Hello! I'm a PhD candidate in [Your Field] at [Your University]. My research focuses on [...].</p>
+    <div class="socials">
+      <a href="https://il.linkedin.com/in/roy-novoselsky-946a58158" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+      <a href="https://github.com/roynov01" aria-label="GitHub"><i class="fab fa-github"></i></a>
+      <a href="https://orcid.org/0000-0002-4464-0179" aria-label="ORCID"><i class="fab fa-orcid"></i></a>
+      <a href="https://scholar.google.com/citations?user=_nrNiDMAAAAJ&hl=iw&oi=ao" aria-label="Google Scholar"><i class="fas fa-graduation-cap"></i></a>
+      <a href="https://pubmed.ncbi.nlm.nih.gov/?term=roy+novoselsky%5BAuthor%5D&sort=" aria-label="PubMed"><i class="fas fa-book-medical"></i></a>
+    </div>
+  </section>
+
+  <section id="research">
+    <h2>Research</h2>
+    <p>[Brief overview of your research interests and projects.]</p>
+  </section>
+
+  <section id="publications">
+    <h2>Publications</h2>
+    <ul>
+      <li><strong>Title of Paper 1</strong>, Journal, Year.</li>
+      <li><strong>Title of Paper 2</strong>, Journal, Year.</li>
+      <!-- Add more publications here -->
+    </ul>
+  </section>
+
+  <section id="contact">
+    <h2>Contact</h2>
+    <p>Email: <a href="mailto:your.email@university.edu">your.email@university.edu</a></p>
+    <p>Address: Department, University, City, Country</p>
+  </section>
+</main>
+
+<footer>&copy; <span id="year"></span> Your Name</footer>
+
+<script>
+  // Auto‑update the footer year
+  document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+
+</body>
+</html>
