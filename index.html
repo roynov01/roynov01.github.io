@@ -76,11 +76,17 @@
       margin-bottom: 1rem;
     }
     /* --- Social icon styles --- */
-    .socials {
-      margin-top: 1rem;
-      display: flex;
-      gap: 1rem;
-    }
+    .about-top {
+	  display: flex;
+	  align-items: center;
+	  gap: 1.5rem;
+	}
+
+	.socials {
+	  display: flex;
+	  flex-direction: column;
+	  margin-top: 0;
+	}
     .socials a {
       font-size: 1.6rem;
       transition: opacity 0.2s;
@@ -111,7 +117,6 @@
     <div class="logo"><strong>Roy&nbsp;Novoselsky</strong></div>
     <ul>
       <li><a href="#about">About</a></li>
-      <li><a href="#research">Research</a></li>
       <li><a href="#publications">Publications</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
@@ -120,24 +125,21 @@
 
 <main>
   <section id="about">
-    <h2>About</h2>
+  <h2>About</h2>
+  <div class="about-top">
     <img src="images/profile.jpg" alt="Roy Novoselsky profile photo" class="profile-img">
-	<div class="socials">
+
+    <div class="socials">
       <a href="https://il.linkedin.com/in/roy-novoselsky-946a58158" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer"><i class="fab fa-linkedin"></i></a>
       <a href="https://github.com/roynov01" aria-label="GitHub" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i></a>
       <a href="https://orcid.org/0000-0002-4464-0179" aria-label="ORCID" target="_blank" rel="noopener noreferrer"><i class="fab fa-orcid"></i></a>
       <a href="https://scholar.google.com/citations?user=_nrNiDMAAAAJ&hl=iw&oi=ao" aria-label="Google Scholar" target="_blank" rel="noopener noreferrer"><i class="fas fa-graduation-cap"></i></a>
       <a href="https://pubmed.ncbi.nlm.nih.gov/?term=roy+novoselsky%5BAuthor%5D&sort=" aria-label="PubMed" target="_blank" rel="noopener noreferrer"><i class="fas fa-book-medical"></i></a>
     </div>
-    <p>I'm a Biology PhD candidate at the Weizmann Institute of Science. </p>
-    <p>I'm part of <a href="https://shalevlab.weizmann.ac.il/" target="_blank" rel="noopener noreferrer">Shalev&nbsp;Itzkovitz</a> group.</p>
-    
-  </section>
-
-  <section id="research">
-    <h2>Research</h2>
-    <p>My research focuses on systems biology, spatial transcriptomics and mRNA polarisation inside cells.</p>
-  </section>
+  </div>
+  <p>I'm a Biology PhD candidate at the Weizmann Institute of Science. My research focuses on systems biology, spatial transcriptomics and mRNA polarisation inside cells.</p>
+  <p>Learn more about our work on the <a href="https://shalevlab.weizmann.ac.il/" target="_blank" rel="noopener noreferrer">lab&nbsp;website</a>.</p>
+</section>
 
 	<section id="publications">
 	  <h2>Publications</h2>
