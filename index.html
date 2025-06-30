@@ -3,11 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Your Name – Personal Site</title>
+  <title>Roy Novoselsky</title>
   <!-- Google Font -->
   <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
-  <!-- Font Awesome for icons -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-+CbDv6MySfyZB9" crossorigin="anonymous" />
+  <!-- Font Awesome (icons) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
   <style>
     :root {
       --primary: #1e88e5;
@@ -75,19 +75,27 @@
       border: 4px solid var(--primary);
       margin-bottom: 1rem;
     }
+    /* --- Social icon styles --- */
     .socials {
       margin-top: 1rem;
       display: flex;
       gap: 1rem;
     }
     .socials a {
-      font-size: 1.5rem;
-      color: var(--text);
-      transition: color 0.2s;
+      font-size: 1.6rem;
+      transition: opacity 0.2s;
+      text-decoration: none;
     }
     .socials a:hover {
-      color: var(--primary);
+      opacity: 0.7; /* subtle fade on hover */
     }
+    /* Brand colours */
+    .socials a[aria-label="LinkedIn"]      { color: #0A66C2; }
+    .socials a[aria-label="GitHub"]        { color: #181717; }
+    .socials a[aria-label="ORCID"]         { color: #A6CE39; }
+    .socials a[aria-label="Google Scholar"]{ color: #4285F4; }
+    .socials a[aria-label="PubMed"]        { color: #2B7BB9; }
+
     footer {
       margin: 4rem 0;
       text-align: center;
@@ -100,7 +108,7 @@
 
 <header>
   <nav>
-    <div class="logo"><strong>Your&nbsp;Name</strong></div>
+    <div class="logo"><strong>Roy&nbsp;Novoselsky</strong></div>
     <ul>
       <li><a href="#about">About</a></li>
       <li><a href="#research">Research</a></li>
@@ -113,39 +121,53 @@
 <main>
   <section id="about">
     <h2>About</h2>
-    <img src="images/profile.jpg" alt="Profile photo" class="profile-img">
-    <p>Hello! I'm a PhD candidate in [Your Field] at [Your University]. My research focuses on [...].</p>
-    <div class="socials">
-      <a href="https://il.linkedin.com/in/roy-novoselsky-946a58158" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
-      <a href="https://github.com/roynov01" aria-label="GitHub"><i class="fab fa-github"></i></a>
-      <a href="https://orcid.org/0000-0002-4464-0179" aria-label="ORCID"><i class="fab fa-orcid"></i></a>
-      <a href="https://scholar.google.com/citations?user=_nrNiDMAAAAJ&hl=iw&oi=ao" aria-label="Google Scholar"><i class="fas fa-graduation-cap"></i></a>
-      <a href="https://pubmed.ncbi.nlm.nih.gov/?term=roy+novoselsky%5BAuthor%5D&sort=" aria-label="PubMed"><i class="fas fa-book-medical"></i></a>
+    <img src="images/profile.jpg" alt="Roy Novoselsky profile photo" class="profile-img">
+	<div class="socials">
+      <a href="https://il.linkedin.com/in/roy-novoselsky-946a58158" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer"><i class="fab fa-linkedin"></i></a>
+      <a href="https://github.com/roynov01" aria-label="GitHub" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i></a>
+      <a href="https://orcid.org/0000-0002-4464-0179" aria-label="ORCID" target="_blank" rel="noopener noreferrer"><i class="fab fa-orcid"></i></a>
+      <a href="https://scholar.google.com/citations?user=_nrNiDMAAAAJ&hl=iw&oi=ao" aria-label="Google Scholar" target="_blank" rel="noopener noreferrer"><i class="fas fa-graduation-cap"></i></a>
+      <a href="https://pubmed.ncbi.nlm.nih.gov/?term=roy+novoselsky%5BAuthor%5D&sort=" aria-label="PubMed" target="_blank" rel="noopener noreferrer"><i class="fas fa-book-medical"></i></a>
     </div>
+    <p>I'm a Biology PhD candidate at the Weizmann Institute of Science. </p>
+    <p>I'm part of <a href="https://shalevlab.weizmann.ac.il/" target="_blank" rel="noopener noreferrer">Shalev&nbsp;Itzkovitz</a> group.</p>
+    
   </section>
 
   <section id="research">
     <h2>Research</h2>
-    <p>[Brief overview of your research interests and projects.]</p>
+    <p>My research focuses on systems biology, spatial transcriptomics and mRNA polarisation inside cells.</p>
   </section>
 
-  <section id="publications">
-    <h2>Publications</h2>
-    <ul>
-      <li><strong>Title of Paper 1</strong>, Journal, Year.</li>
-      <li><strong>Title of Paper 2</strong>, Journal, Year.</li>
-      <!-- Add more publications here -->
-    </ul>
-  </section>
+	<section id="publications">
+	  <h2>Publications</h2>
+	  <ul>
+		<li style="margin-bottom: 20px;">
+		  <strong>Intracellular polarization of RNAs and proteins in the human small intestinal epithelium.</strong><br>
+		  <strong>Roy Novoselsky</strong>, Yotam Harnik, Oran Yakubovsky, Corine Katina, Yishai Levin, Keren Bahar Halpern, Niv Pencovich, Ido Nachmany, Shalev Itzkovitz.<br>
+		  <a href="https://journals.plos.org/plosbiology/article?id=10.1371/journal.pbio.3002942" target="_blank" rel="noopener noreferrer">PLOS Biology (2024)</a>
+		</li>
+		<li style="margin-bottom: 20px;">
+		  <strong>A spatial expression atlas of the adult human proximal small intestine</strong><br>
+		  Yotam Harnik, Oran Yakubovsky, Rouven Hoefflin, <strong>Roy Novoselsky</strong>, Keren Bahar Halpern, Tal Barkai, Yael Korem Kohanim, Adi Egozi, Ofra Golani, Yoseph Addadi, Merav Kedmi, Tal Keidar Haran, Yishai Levin, Alon Savidor, Hadas Keren-Shaul, Chen Mayer, Niv Pencovich, Ron Pery, Dror S. Shouval, Itay Tirosh, Ido Nachmany, Shalev Itzkovitz.<br>
+		  <a href="https://www.nature.com/articles/s41586-024-07793-3" target="_blank" rel="noopener noreferrer">Nature (2024)</a>
+		</li>
+		<li style="margin-bottom: 20px;">
+		  <strong>RNA editing deficiency models differential immunogenicity of pancreatic α- and β-cells</strong><br>
+		  Shani Peleg , Liza Zamashanski , Jonathan Belin , <strong>Roy Novoselsky</strong> , Roni Cohen-Fultheim , Udi Ehud Knebel , Benjamin Glaser , Shalev Itzkovitz , Klaus H. Kaestner , Alvin C. Powers  , Erez Y. Levanon , Agnes Klochendler , Yuval Dor.<br>
+		  <a href="https://www.sciencedirect.com/science/article/pii/S2212877825000900" target="_blank" rel="noopener noreferrer">Molecular Metabolism (2025)</a>
+		</li>
+	  </ul>
+	</section>
 
   <section id="contact">
     <h2>Contact</h2>
-    <p>Email: <a href="mailto:your.email@university.edu">your.email@university.edu</a></p>
-    <p>Address: Department, University, City, Country</p>
+    <p>Email: <a href="mailto:roy.novoselsky@weizmann.ac.il">roy.novoselsky@weizmann.ac.il</a></p>
+    <p>Address: Department of Molecular Cell Biology, Weizmann Institute of Science, Rehovot, Israel</p>
   </section>
 </main>
 
-<footer>&copy; <span id="year"></span> Your Name</footer>
+<footer>&copy; <span id="year"></span> Roy Novoselsky</footer>
 
 <script>
   // Auto‑update the footer year
