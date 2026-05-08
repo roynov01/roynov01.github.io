@@ -69,6 +69,29 @@
       gap: 0.25rem;
     }
 
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .theme-toggle {
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 1.1rem;
+      color: var(--text-muted);
+      padding: 0.35rem 0.45rem;
+      border-radius: 0.4rem;
+      line-height: 1;
+      transition: background 0.15s, color 0.15s;
+    }
+
+    .theme-toggle:hover {
+      background: #eff6ff;
+      color: var(--primary);
+    }
+
     nav a {
       color: var(--text-muted);
       text-decoration: none;
@@ -404,6 +427,56 @@
       border-top: 1px solid var(--border);
       margin-top: 5rem;
     }
+
+    /* ── Dark mode ── */
+    html[data-theme="dark"] {
+      --bg: #0f172a;
+      --surface: #1e293b;
+      --text: #f1f5f9;
+      --text-muted: #94a3b8;
+      --border: #334155;
+      --primary: #60a5fa;
+    }
+
+    html[data-theme="dark"] header {
+      background: rgba(15, 23, 42, 0.85);
+    }
+
+    html[data-theme="dark"] nav a:hover,
+    html[data-theme="dark"] nav a.active {
+      background: #1e3a5f;
+    }
+
+    html[data-theme="dark"] .theme-toggle:hover {
+      background: #1e3a5f;
+    }
+
+    html[data-theme="dark"] .socials a {
+      background: var(--surface);
+    }
+
+    html[data-theme="dark"] .socials a:hover {
+      background: #1e3a5f;
+    }
+
+    html[data-theme="dark"] nav ul {
+      background: #1e293b;
+    }
+
+    html[data-theme="dark"] .pub-extra-link {
+      background: #334155;
+      color: #cbd5e1;
+      border-color: #475569;
+    }
+
+    html[data-theme="dark"] .pub-extra-link:hover { background: #475569; }
+
+    html[data-theme="dark"] .badge-nature   { background: #78350f; color: #fef3c7; }
+    html[data-theme="dark"] .badge-natcomms { background: #064e3b; color: #d1fae5; }
+    html[data-theme="dark"] .badge-plos     { background: #4c1d95; color: #ede9fe; }
+    html[data-theme="dark"] .badge-biorxiv  { background: #7c2d12; color: #ffedd5; }
+    html[data-theme="dark"] .badge-scirep   { background: #14532d; color: #dcfce7; }
+    html[data-theme="dark"] .badge-molmet   { background: #581c87; color: #fae8ff; }
   </style>
 </head>
 <body>
@@ -411,14 +484,19 @@
 <header>
   <nav>
     <div class="logo">Roy Novoselsky</div>
-    <button class="hamburger" aria-label="Toggle navigation" aria-expanded="false">
-      <span></span><span></span><span></span>
-    </button>
-    <ul id="nav-links">
-      <li><a href="#about">About</a></li>
-      <li><a href="#publications">Publications</a></li>
-      <li><a href="#contact">Contact</a></li>
-    </ul>
+    <div class="nav-right">
+      <ul id="nav-links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#publications">Publications</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+      <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode" title="Toggle dark mode">
+        <i class="fas fa-moon"></i>
+      </button>
+      <button class="hamburger" aria-label="Toggle navigation" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
   </nav>
 </header>
 
@@ -466,6 +544,28 @@
 
 <script>
   document.getElementById('year').textContent = new Date().getFullYear();
+
+  // ── Dark mode toggle ──
+  const themeToggle = document.getElementById('theme-toggle');
+  const themeIcon = themeToggle.querySelector('i');
+
+  function setTheme(dark) {
+    if (dark) {
+      document.documentElement.setAttribute('data-theme', 'dark');
+      themeIcon.className = 'fas fa-sun';
+      localStorage.setItem('theme', 'dark');
+    } else {
+      document.documentElement.removeAttribute('data-theme');
+      themeIcon.className = 'fas fa-moon';
+      localStorage.setItem('theme', 'light');
+    }
+  }
+
+  setTheme(localStorage.getItem('theme') === 'dark');
+
+  themeToggle.addEventListener('click', () => {
+    setTheme(document.documentElement.getAttribute('data-theme') !== 'dark');
+  });
 
   // Active nav highlight via IntersectionObserver
   const sections = document.querySelectorAll('section[id]');
@@ -561,6 +661,7 @@
     .then(r => r.text())
     .then(csv => {
       const { data } = Papa.parse(csv, { header: true, skipEmptyLines: true });
+      data.sort((a, b) => (parseInt(b.main) || 0) - (parseInt(a.main) || 0));
       document.getElementById('pub-list').innerHTML = data.map(renderPub).join('');
     });
 </script>
