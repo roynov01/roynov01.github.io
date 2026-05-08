@@ -7,6 +7,7 @@
   <title>Roy Novoselsky</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
   <style>
     :root {
       --primary: #2563eb;
@@ -252,6 +253,27 @@
       border-color: #cbd5e1;
     }
 
+    .pub-inner {
+      display: flex;
+      gap: 1.25rem;
+      align-items: flex-start;
+    }
+
+    .pub-content { flex: 1; min-width: 0; }
+
+    .pub-img {
+      width: 110px;
+      height: 110px;
+      object-fit: cover;
+      border-radius: 0.5rem;
+      border: 1px solid var(--border);
+      flex-shrink: 0;
+    }
+
+    @media (max-width: 600px) {
+      .pub-img { width: 80px; height: 80px; }
+    }
+
     .pub-title {
       font-weight: 600;
       font-size: 0.97rem;
@@ -373,48 +395,7 @@
 
   <section id="publications">
     <h2>Publications</h2>
-    <ul>
-      <li>
-        <div class="pub-title">Subcellular mRNA localization patterns across tissues resolved with spatial transcriptomics.</div>
-        <div class="pub-authors"><strong>Roy Novoselsky</strong><sup>*</sup>, Ofra Golani<sup>*</sup>, Tal Barkai, Merav Kedmi, Inna Goliand, Michal Fine, Ilan Kent, Ido Nachmany, Shalev Itzkovitz.</div>
-        <a class="pub-link badge-natcomms" href="https://www.nature.com/articles/s41467-026-72156-7" target="_blank" rel="noopener noreferrer"><i class="fas fa-external-link-alt"></i> Nature Communications (2026)</a>
-      </li>
-      <li>
-        <div class="pub-title">A spatial atlas of the healthy human liver from live donors.</div>
-        <div class="pub-authors">Oran Yakubovsky, Keren Bahar Halpern, Sapir Shir, <strong>Roy Novoselsky</strong>, Amichay Afriat, Adi Egozi, Tal Barkai, Yotam Harnik, Hoefflin Rouven, Yael Korem Kohanim, Ofra Golani, Inna Goliand, Yoseph Addadi, Merav Kedmi, Hadas Keren-Shaul, Liat Fellus-Alyagor, Lena Prichislov, Dana Hirsch, Chen Mayer, Ron Pery, Niv Pencovich, Timucin Taner, Ido Nachmany, Shalev Itzkovitz.</div>
-        <a class="pub-link badge-nature" href="https://www.nature.com/articles/s41586-026-10377-y" target="_blank" rel="noopener noreferrer"><i class="fas fa-external-link-alt"></i> Nature (2026)</a>
-      </li>
-      <li>
-        <div class="pub-title">A stress-function tradeoff organizes epithelial heterogeneity across spatial scales in the human thyroid.</div>
-        <div class="pub-authors">Yael Korem Kohanim<sup>*</sup>, Tal Barkai<sup>*</sup>, <strong>Roy Novoselsky</strong>, Sapir Shir, Keren Bahar Halpern, Shlomit Reich-Zeliger, Jacob Elkahal, Idit Tessler, Shaked Shivatzki, Ignat Schwartz, Eric Remer, Galit Avior, Rouven Hoefllin, Merav Kedmi, Hadas Keren-Shaul, Inna Goliand, Yoseph Addadi, Ofra Golani, Eran Alon, Shalev Itzkovitz, Ruslan Medzhitov.</div>
-        <a class="pub-link badge-biorxiv" href="https://www.biorxiv.org/content/10.64898/2026.03.12.711294v1" target="_blank" rel="noopener noreferrer"><i class="fas fa-external-link-alt"></i> bioRxiv (2026)</a>
-      </li>
-      <li>
-        <div class="pub-title">Spatial Rewiring of Enterocyte Identity in Celiac Disease.</div>
-        <div class="pub-authors">Tal Barkai, Rachel Frieman-Sharabi, Keren Bahar Halpern, <strong>Roy Novoselsky</strong>, Yael Korem Kohanim, Sapir Shir, Ofra Golani, Inna Goliand, Yoseph Addadi, Merav Kedmi, Hadas Keren-Shaul, Lena Prichislov, Anat Guz-Mark, Hadassah Nissim, Raanan Shamir<sup>*</sup>, Dror Shouval<sup>*</sup>, Shalev Itzkovitz<sup>*</sup>.</div>
-        <a class="pub-link badge-biorxiv" href="https://www.biorxiv.org/content/10.64898/2026.02.14.705877v1" target="_blank" rel="noopener noreferrer"><i class="fas fa-external-link-alt"></i> bioRxiv (2026)</a>
-      </li>
-      <li>
-        <div class="pub-title">Stool shed cell transcriptomics mirrors tumor biology and enables colorectal cancer diagnosis.</div>
-        <div class="pub-authors">Bahar Halpern Keren, Kent Ilan, Yakubovsky Oran, Ben-Moshe Shani, Barkai Tal, Fine Michal, <strong>Novoselsky Roy</strong>, Israeli Alon, Nachmany Ido, Itzkovitz Shalev.</div>
-        <a class="pub-link badge-scirep" href="https://www.nature.com/articles/s41598-025-17411-5" target="_blank" rel="noopener noreferrer"><i class="fas fa-external-link-alt"></i> Scientific Reports (2025)</a>
-      </li>
-      <li>
-        <div class="pub-title">RNA editing deficiency models differential immunogenicity of pancreatic α- and β-cells.</div>
-        <div class="pub-authors">Shani Peleg, Liza Zamashanski, Jonathan Belin, <strong>Roy Novoselsky</strong>, Roni Cohen-Fultheim, Udi Ehud Knebel, Benjamin Glaser, Shalev Itzkovitz, Klaus H. Kaestner, Alvin C. Powers, Erez Y. Levanon, Agnes Klochendler, Yuval Dor.</div>
-        <a class="pub-link badge-molmet" href="https://www.sciencedirect.com/science/article/pii/S2212877825000900" target="_blank" rel="noopener noreferrer"><i class="fas fa-external-link-alt"></i> Molecular Metabolism (2025)</a>
-      </li>
-      <li>
-        <div class="pub-title">Intracellular polarization of RNAs and proteins in the human small intestinal epithelium.</div>
-        <div class="pub-authors"><strong>Roy Novoselsky</strong>, Yotam Harnik, Oran Yakubovsky, Corine Katina, Yishai Levin, Keren Bahar Halpern, Niv Pencovich, Ido Nachmany, Shalev Itzkovitz.</div>
-        <a class="pub-link badge-plos" href="https://journals.plos.org/plosbiology/article?id=10.1371/journal.pbio.3002942" target="_blank" rel="noopener noreferrer"><i class="fas fa-external-link-alt"></i> PLOS Biology (2024)</a>
-      </li>
-      <li>
-        <div class="pub-title">A spatial expression atlas of the adult human proximal small intestine.</div>
-        <div class="pub-authors">Yotam Harnik<sup>*</sup>, Oran Yakubovsky<sup>*</sup>, Rouven Hoefflin<sup>*</sup>, <strong>Roy Novoselsky</strong>, Keren Bahar Halpern, Tal Barkai, Yael Korem Kohanim, Adi Egozi, Ofra Golani, Yoseph Addadi, Merav Kedmi, Tal Keidar Haran, Yishai Levin, Alon Savidor, Hadas Keren-Shaul, Chen Mayer, Niv Pencovich, Ron Pery, Dror S. Shouval, Itay Tirosh, Ido Nachmany, Shalev Itzkovitz.</div>
-        <a class="pub-link badge-nature" href="https://www.nature.com/articles/s41586-024-07793-3" target="_blank" rel="noopener noreferrer"><i class="fas fa-external-link-alt"></i> Nature (2024)</a>
-      </li>
-    </ul>
+    <ul id="pub-list"></ul>
   </section>
 
   <section id="contact">
@@ -466,6 +447,57 @@
       hamburger.setAttribute('aria-expanded', 'false');
     });
   });
+
+  // ── Publications: load from CSV ──
+  const badgeMap = {
+    'nature communications': 'badge-natcomms',
+    'nature':                'badge-nature',
+    'plos biology':          'badge-plos',
+    'biorxiv':               'badge-biorxiv',
+    'scientific reports':    'badge-scirep',
+    'molecular metabolism':  'badge-molmet',
+  };
+
+  function badgeClass(journal) {
+    return badgeMap[journal.trim().toLowerCase()] || '';
+  }
+
+  function formatAuthors(str) {
+    // Bold Roy's name in either name order
+    str = str.replace(/Roy Novoselsky/g,  '<strong>Roy Novoselsky</strong>');
+    str = str.replace(/Novoselsky Roy/g,  '<strong>Novoselsky Roy</strong>');
+    // Convert all * markers to superscripts
+    str = str.replace(/\*/g, '<sup>*</sup>');
+    return str;
+  }
+
+  function renderPub(row) {
+    const imgFile = row.image_path && row.image_path.trim();
+    const img = imgFile
+      ? `<img src="images/${imgFile}" alt="" class="pub-img">`
+      : '';
+    return `
+      <li>
+        <div class="pub-inner">
+          <div class="pub-content">
+            <div class="pub-title">${row.title}</div>
+            <div class="pub-authors">${formatAuthors(row.authors)}</div>
+            <a class="pub-link ${badgeClass(row.journal)}"
+               href="${row.paper_url}" target="_blank" rel="noopener noreferrer">
+              <i class="fas fa-external-link-alt"></i> ${row.journal} (${row.year})
+            </a>
+          </div>
+          ${img}
+        </div>
+      </li>`;
+  }
+
+  fetch('publications.csv')
+    .then(r => r.text())
+    .then(csv => {
+      const { data } = Papa.parse(csv, { header: true, skipEmptyLines: true });
+      document.getElementById('pub-list').innerHTML = data.map(renderPub).join('');
+    });
 </script>
 
 </body>
