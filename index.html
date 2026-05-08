@@ -261,17 +261,33 @@
 
     .pub-content { flex: 1; min-width: 0; }
 
-    .pub-img {
-      width: 110px;
-      height: 110px;
-      object-fit: cover;
-      border-radius: 0.5rem;
-      border: 1px solid var(--border);
+    .pub-img-wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.4rem;
       flex-shrink: 0;
     }
 
+    .pub-img {
+      width: 220px;
+      height: 220px;
+      object-fit: cover;
+      border-radius: 0.5rem;
+      border: 1px solid var(--border);
+    }
+
+    .pub-img-legend {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      max-width: 220px;
+      line-height: 1.4;
+    }
+
     @media (max-width: 600px) {
-      .pub-img { width: 80px; height: 80px; }
+      .pub-inner { flex-direction: column; }
+      .pub-img { width: 100%; height: auto; aspect-ratio: 1 / 1; }
+      .pub-img-legend { max-width: 100%; }
     }
 
     .pub-title {
@@ -473,9 +489,12 @@
 
   function renderPub(row) {
     const imgFile = row.image_path && row.image_path.trim();
-    const img = imgFile
-      ? `<img src="images/${imgFile}" alt="" class="pub-img">`
-      : '';
+    const legend = row.legend && row.legend.trim();
+    const img = imgFile ? `
+      <div class="pub-img-wrap">
+        <img src="images/${imgFile}" alt="" class="pub-img">
+        ${legend ? `<span class="pub-img-legend">${legend}</span>` : ''}
+      </div>` : '';
     return `
       <li>
         <div class="pub-inner">
