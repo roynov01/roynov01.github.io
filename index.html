@@ -242,13 +242,13 @@
       background: #eff6ff;
     }
 
-    /* Brand icon colours */
+    /* Brand icon colours (light mode only) */
     .socials a[aria-label="LinkedIn"] i       { color: #0A66C2; }
     .socials a[aria-label="GitHub"] i         { color: #181717; }
-    html[data-theme="dark"] .socials a[aria-label="GitHub"] i { color: #e6edf3; }
     .socials a[aria-label="ORCID"] i          { color: #A6CE39; }
     .socials a[aria-label="Google Scholar"] i { color: #4285F4; }
     .socials a[aria-label="PubMed"] i         { color: #2B7BB9; }
+    html[data-theme="dark"] .socials a i      { color: #e6edf3; }
 
     @media (max-width: 600px) {
       .about-card { flex-direction: column; align-items: center; text-align: center; }
@@ -346,7 +346,7 @@
       align-self: flex-start;
       align-items: center;
       gap: 0.35rem;
-      font-size: 1.1rem;
+      font-size: 0.95rem;
       font-weight: 600;
       padding: 0.55rem 1.3rem;
       border-radius: 0.4rem;
@@ -453,19 +453,13 @@
     }
 
     html[data-theme="dark"] .socials a {
-      background: var(--surface);
-      border-color: #334155;
+      background: #1c2128;
+      border-color: #484f58;
     }
 
-    html[data-theme="dark"] .socials a[aria-label="LinkedIn"]      { background: #0a3a6e; border-color: #1a5fa8; }
-    html[data-theme="dark"] .socials a[aria-label="GitHub"]        { background: #1c2128; border-color: #484f58; }
-    html[data-theme="dark"] .socials a[aria-label="ORCID"]         { background: #1a3a0a; border-color: #5a8a1a; }
-    html[data-theme="dark"] .socials a[aria-label="Google Scholar"] { background: #0a2a5e; border-color: #2a5ac8; }
-    html[data-theme="dark"] .socials a[aria-label="PubMed"]        { background: #0a2a4a; border-color: #1a5a8a; }
-
     html[data-theme="dark"] .socials a:hover {
-      background: #1e3a5f;
-      border-color: var(--primary);
+      background: #2d333b;
+      border-color: #768390;
     }
 
     html[data-theme="dark"] nav ul {
