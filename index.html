@@ -3,110 +3,335 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Roy Novoselsky – Biology PhD candidate at the Weizmann Institute of Science, researching spatial transcriptomics and mRNA polarization.">
   <title>Roy Novoselsky</title>
-  <!-- Google Font -->
-  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
-  <!-- Font Awesome (icons) -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
   <style>
     :root {
-      --primary: #1e88e5;
-      --bg: #f8f9fa;
-      --text: #212529;
+      --primary: #2563eb;
+      --bg: #f8fafc;
+      --surface: #ffffff;
+      --text: #0f172a;
+      --text-muted: #64748b;
+      --border: #e2e8f0;
+      --radius: 0.75rem;
     }
+
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
-      scroll-behavior: smooth;
-      font-family: 'Open Sans', sans-serif;
     }
+
+    html { scroll-behavior: smooth; }
+
     body {
       background: var(--bg);
       color: var(--text);
-      line-height: 1.6;
+      font-family: 'Inter', sans-serif;
+      line-height: 1.7;
     }
+
+    /* ── Header ── */
     header {
-      background: #fff;
-      padding: 1rem 2rem;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      padding: 0 2rem;
+      box-shadow: 0 1px 0 var(--border);
       position: sticky;
       top: 0;
       z-index: 100;
+      height: 60px;
     }
+
     nav {
       display: flex;
       justify-content: space-between;
       align-items: center;
       max-width: 1000px;
       margin: 0 auto;
+      height: 100%;
     }
+
+    .logo {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--text);
+      letter-spacing: -0.01em;
+    }
+
     nav ul {
       list-style: none;
       display: flex;
-      gap: 1rem;
+      gap: 0.25rem;
     }
+
     nav a {
-      color: var(--text);
+      color: var(--text-muted);
       text-decoration: none;
-      font-weight: 600;
-      padding: 0.5rem 1rem;
-      border-radius: 0.25rem;
-      transition: background 0.2s;
+      font-weight: 500;
+      font-size: 0.9rem;
+      padding: 0.4rem 0.9rem;
+      border-radius: 0.5rem;
+      transition: background 0.15s, color 0.15s;
     }
-    nav a:hover {
-      background: var(--primary);
-      color: #fff;
-    }
-    section {
-      max-width: 1000px;
-      margin: 4rem auto;
-      padding: 0 2rem;
-    }
-    h1, h2 {
-      margin-bottom: 1rem;
+
+    nav a:hover,
+    nav a.active {
+      background: #eff6ff;
       color: var(--primary);
     }
+
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 0.25rem;
+      background: none;
+      border: none;
+    }
+
+    .hamburger span {
+      display: block;
+      width: 22px;
+      height: 2px;
+      background: var(--text);
+      border-radius: 2px;
+      transition: all 0.25s;
+    }
+
+    .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    @media (max-width: 600px) {
+      .hamburger { display: flex; }
+      nav ul {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 60px;
+        left: 0;
+        right: 0;
+        background: white;
+        padding: 1rem;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+        gap: 0.25rem;
+      }
+      nav ul.open { display: flex; }
+      nav a { font-size: 1rem; padding: 0.6rem 1rem; }
+    }
+
+    /* ── Sections ── */
+    section {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 5rem 2rem 0;
+      scroll-margin-top: 60px;
+    }
+
+    section:last-of-type { padding-bottom: 5rem; }
+
+    h2 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--text);
+      letter-spacing: -0.02em;
+      margin-bottom: 1.5rem;
+      padding-bottom: 0.75rem;
+      border-bottom: 2px solid var(--border);
+    }
+
+    /* ── About ── */
+    .about-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 2rem;
+      display: flex;
+      gap: 2rem;
+      align-items: flex-start;
+    }
+
     .profile-img {
-      width: 200px;
-      height: 200px;
+      width: 150px;
+      height: 150px;
       object-fit: cover;
       border-radius: 50%;
-      border: 4px solid var(--primary);
-      margin-bottom: 1rem;
+      border: 3px solid var(--border);
+      flex-shrink: 0;
     }
-    /* --- Social icon styles --- */
-    .about-top {
-	  display: flex;
-	  align-items: center;
-	  gap: 1.5rem;
-	}
 
-	.socials {
-	  display: flex;
-	  flex-direction: column;
-	  margin-top: 0;
-	}
-    .socials a {
-      font-size: 1.6rem;
-      transition: opacity 0.2s;
+    .about-body {
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+    }
+
+    .about-body h1 {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--text);
+      letter-spacing: -0.02em;
+    }
+
+    .about-body p {
+      color: var(--text-muted);
+      font-size: 0.96rem;
+    }
+
+    .about-body a {
+      color: var(--primary);
       text-decoration: none;
     }
-    .socials a:hover {
-      opacity: 0.7; /* subtle fade on hover */
-    }
-    /* Brand colours */
-    .socials a[aria-label="LinkedIn"]      { color: #0A66C2; }
-    .socials a[aria-label="GitHub"]        { color: #181717; }
-    .socials a[aria-label="ORCID"]         { color: #A6CE39; }
-    .socials a[aria-label="Google Scholar"]{ color: #4285F4; }
-    .socials a[aria-label="PubMed"]        { color: #2B7BB9; }
 
-    footer {
-      margin: 4rem 0;
+    .about-body a:hover { text-decoration: underline; }
+
+    .socials {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 0.4rem;
+    }
+
+    .socials a {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.82rem;
+      font-weight: 500;
+      padding: 0.35rem 0.75rem;
+      border-radius: 100px;
+      border: 1px solid var(--border);
+      text-decoration: none;
+      color: var(--text);
+      background: var(--bg);
+      transition: border-color 0.15s, color 0.15s, background 0.15s;
+    }
+
+    .socials a:hover {
+      border-color: var(--primary);
+      color: var(--primary);
+      background: #eff6ff;
+    }
+
+    /* Brand icon colours */
+    .socials a[aria-label="LinkedIn"] i       { color: #0A66C2; }
+    .socials a[aria-label="GitHub"] i         { color: #181717; }
+    .socials a[aria-label="ORCID"] i          { color: #A6CE39; }
+    .socials a[aria-label="Google Scholar"] i { color: #4285F4; }
+    .socials a[aria-label="PubMed"] i         { color: #2B7BB9; }
+
+    @media (max-width: 600px) {
+      .about-card { flex-direction: column; align-items: center; text-align: center; }
+      .socials { justify-content: center; }
+      .profile-img { width: 120px; height: 120px; }
+    }
+
+    /* ── Publications ── */
+    #publications ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.85rem;
+    }
+
+    #publications li {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.25rem 1.5rem;
+      transition: box-shadow 0.2s, border-color 0.2s;
+    }
+
+    #publications li:hover {
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.07);
+      border-color: #cbd5e1;
+    }
+
+    .pub-title {
+      font-weight: 600;
+      font-size: 0.97rem;
+      margin-bottom: 0.4rem;
+      color: var(--text);
+    }
+
+    .pub-authors {
+      font-size: 0.87rem;
+      color: var(--text-muted);
+      margin-bottom: 0.6rem;
+      line-height: 1.55;
+    }
+
+    .pub-authors strong {
+      color: var(--text);
+      font-weight: 600;
+    }
+
+    .pub-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      font-size: 0.8rem;
+      font-weight: 600;
+      padding: 0.25rem 0.65rem;
+      border-radius: 0.4rem;
+      text-decoration: none;
+      transition: filter 0.15s;
+    }
+
+    .pub-link:hover { filter: brightness(0.92); }
+
+    .badge-nature   { background: #fef3c7; color: #92400e; }
+    .badge-natcomms { background: #ecfdf5; color: #065f46; }
+    .badge-plos     { background: #f5f3ff; color: #5b21b6; }
+    .badge-biorxiv  { background: #fff7ed; color: #c2410c; }
+    .badge-scirep   { background: #f0fdf4; color: #166534; }
+    .badge-molmet   { background: #fdf4ff; color: #7e22ce; }
+
+    /* ── Contact ── */
+    .contact-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.9rem;
+    }
+
+    .contact-row {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-size: 0.96rem;
+    }
+
+    .contact-row i {
+      width: 18px;
+      color: var(--primary);
+      flex-shrink: 0;
       text-align: center;
-      font-size: 0.9rem;
-      color: #777;
+    }
+
+    .contact-card a {
+      color: var(--primary);
+      text-decoration: none;
+    }
+
+    .contact-card a:hover { text-decoration: underline; }
+
+    /* ── Footer ── */
+    footer {
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      border-top: 1px solid var(--border);
+      margin-top: 5rem;
     }
   </style>
 </head>
@@ -114,8 +339,11 @@
 
 <header>
   <nav>
-    <div class="logo"><strong>Roy&nbsp;Novoselsky</strong></div>
-    <ul>
+    <div class="logo">Roy Novoselsky</div>
+    <button class="hamburger" aria-label="Toggle navigation" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+    <ul id="nav-links">
       <li><a href="#about">About</a></li>
       <li><a href="#publications">Publications</a></li>
       <li><a href="#contact">Contact</a></li>
@@ -125,81 +353,119 @@
 
 <main>
   <section id="about">
-  <h2>About</h2>
-  <div class="about-top">
-    <img src="images/profile.jpg" alt="Roy Novoselsky profile photo" class="profile-img">
-
-    <div class="socials">
-      <a href="https://il.linkedin.com/in/roy-novoselsky-946a58158" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer"><i class="fab fa-linkedin"></i></a>
-      <a href="https://github.com/roynov01" aria-label="GitHub" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i></a>
-      <a href="https://orcid.org/0000-0002-4464-0179" aria-label="ORCID" target="_blank" rel="noopener noreferrer"><i class="fab fa-orcid"></i></a>
-      <a href="https://scholar.google.com/citations?user=_nrNiDMAAAAJ&hl=iw&oi=ao" aria-label="Google Scholar" target="_blank" rel="noopener noreferrer"><i class="fas fa-graduation-cap"></i></a>
-      <a href="https://pubmed.ncbi.nlm.nih.gov/?term=roy+novoselsky%5BAuthor%5D&sort=" aria-label="PubMed" target="_blank" rel="noopener noreferrer"><i class="fas fa-book-medical"></i></a>
+    <h2>About</h2>
+    <div class="about-card">
+      <img src="images/profile.jpg" alt="Roy Novoselsky profile photo" class="profile-img">
+      <div class="about-body">
+        <h1>Roy Novoselsky</h1>
+        <p>I'm a Biology PhD candidate at the Weizmann Institute of Science in <a href="https://shalevlab.weizmann.ac.il/" target="_blank" rel="noopener noreferrer">Shalev&nbsp;Itzkovitz&nbsp;lab</a>.</p>
+        <p>My research focuses on systems biology, spatial transcriptomics and mRNA polarization inside cells.</p>
+        <div class="socials">
+          <a href="https://il.linkedin.com/in/roy-novoselsky-946a58158" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer"><i class="fab fa-linkedin"></i> LinkedIn</a>
+          <a href="https://github.com/roynov01" aria-label="GitHub" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i> GitHub</a>
+          <a href="https://orcid.org/0000-0002-4464-0179" aria-label="ORCID" target="_blank" rel="noopener noreferrer"><i class="fab fa-orcid"></i> ORCID</a>
+          <a href="https://scholar.google.com/citations?user=_nrNiDMAAAAJ&hl=iw&oi=ao" aria-label="Google Scholar" target="_blank" rel="noopener noreferrer"><i class="fas fa-graduation-cap"></i> Scholar</a>
+          <a href="https://pubmed.ncbi.nlm.nih.gov/?term=roy+novoselsky%5BAuthor%5D&sort=" aria-label="PubMed" target="_blank" rel="noopener noreferrer"><i class="fas fa-book-medical"></i> PubMed</a>
+        </div>
+      </div>
     </div>
-  </div>
-  <p>I'm a Biology PhD candidate at the Weizmann Institute of Science in <a href="https://shalevlab.weizmann.ac.il/" target="_blank" rel="noopener noreferrer">Shalev&nbsp;Itzkovitz&nbsp;lab</a>. </p>
-  <p>My research focuses on systems biology, spatial transcriptomics and mRNA polarization inside cells.</p>
-</section>
+  </section>
 
-	<section id="publications">
-	  <h2>Publications</h2>
-	  <ul>
-		  <li style="margin-bottom: 20px;">
-		  <strong><u>Subcellular mRNA localization patterns across tissues resolved with spatial transcriptomics.</u></strong><br>
-		  <strong>Roy Novoselsky</strong><sup>*</sup>, Ofra Golani<sup>*</sup>, Tal Barkai, Merav Kedmi, Inna Goliand, Michal Fine, Ilan Kent, Ido Nachmany, Shalev Itzkovitz.<br>
-		  <a href="https://www.nature.com/articles/s41467-026-72156-7" target="_blank" rel="noopener noreferrer">Nature Communications (2026)</a>
-		</li>
-		  <li style="margin-bottom: 20px;">
-			<strong><u>A spatial atlas of the healthy human liver from live donors. </u></strong><br>
-			Oran Yakubovsky, Keren Bahar Halpern, Sapir Shir, <strong>Roy Novoselsky</strong>, Amichay Afriat, Adi Egozi, Tal Barkai, Yotam Harnik, Hoefflin Rouven, Yael Korem Kohanim, Ofra Golani, Inna Goliand, Yoseph Addadi, Merav Kedmi, Hadas Keren-Shaul, Liat Fellus-Alyagor, Lena Prichislov, Dana Hirsch, Chen Mayer, Ron Pery, Niv Pencovich, Timucin Taner, Ido Nachmany, Shalev Itzkovitz. <br>
-			<a href="https://www.nature.com/articles/s41586-026-10377-y" target="_blank" rel="noopener noreferrer">Nature (2026)</a>
-		</li>	  
-		  <li style="margin-bottom: 20px;">
-			<strong><u> A stress-function tradeoff organizes epithelial heterogeneity across spatial scales in the human thyroid.</u></strong><br>
-			Yael Korem Kohanim*, Tal Barkai*, <strong>Roy Novoselsky</strong>, Sapir Shir, Keren Bahar Halpern, Shlomit Reich-Zeliger, Jacob Elkahal, Idit Tessler, Shaked Shivatzki, Ignat Schwartz, Eric Remer, Galit Avior, Rouven Hoefllin, Merav Kedmi, Hadas Keren-Shaul, Inna Goliand, Yoseph Addadi, Ofra Golani, Eran Alon, Shalev Itzkovitz, Ruslan Medzhitov.<br>
-			<a href="https://www.biorxiv.org/content/10.64898/2026.03.12.711294v1" target="_blank" rel="noopener noreferrer">BioRxiv (2026)</a>
-		</li>
-	  	<li style="margin-bottom: 20px;">
-			<strong><u> Spatial Rewiring of Enterocyte Identity in Celiac Disease.</u></strong><br>
-			Tal Barkai, Rachel Frieman-Sharabi, Keren Bahar Halpern, <strong>Roy Novoselsky</strong>, Yael Korem Kohanim, Sapir Shir, Ofra Golani, Inna Goliand, Yoseph Addadi, Merav Kedmi, Hadas Keren-Shaul, Lena Prichislov, Anat Guz-Mark, Hadassah Nissim, Raanan Shamir*, Dror Shouval*, Shalev Itzkovitz*.<br>
-			<a href="https://www.biorxiv.org/content/10.64898/2026.02.14.705877v1" target="_blank" rel="noopener noreferrer">BioRxiv (2026)</a>
-		</li>
-		<li style="margin-bottom: 20px;">
-			<strong><u> Stool shed cell transcriptomics mirrors tumor biology and enables colorectal cancer diagnosis.</u></strong><br>
-			Bahar Halpern Keren, Kent Ilan, Yakubovsky Oran, Ben-Moshe Shani, Barkai Tal, Fine Michal, <strong>Novoselsky Roy</strong>, Israeli Alon, Nachmany Ido, Itzkovitz Shalev.<br>
-			<a href="https://www.nature.com/articles/s41598-025-17411-5" target="_blank" rel="noopener noreferrer">Scientific reports (2025)</a>
-		</li>
-	  	
-		<li style="margin-bottom: 20px;">
-		  <strong><u>RNA editing deficiency models differential immunogenicity of pancreatic α- and β-cells</u></strong><br>
-		  Shani Peleg, Liza Zamashanski, Jonathan Belin, <strong>Roy Novoselsky</strong>, Roni Cohen-Fultheim, Udi Ehud Knebel, Benjamin Glaser, Shalev Itzkovitz, Klaus H. Kaestner, Alvin C. Powers , Erez Y. Levanon, Agnes Klochendler, Yuval Dor.<br>
-		  <a href="https://www.sciencedirect.com/science/article/pii/S2212877825000900" target="_blank" rel="noopener noreferrer">Molecular Metabolism (2025)</a>
-		</li>
-		<li style="margin-bottom: 20px;">
-		  <strong><u>Intracellular polarization of RNAs and proteins in the human small intestinal epithelium.</u></strong><br>
-		  <strong>Roy Novoselsky</strong>, Yotam Harnik, Oran Yakubovsky, Corine Katina, Yishai Levin, Keren Bahar Halpern, Niv Pencovich, Ido Nachmany, Shalev Itzkovitz.<br>
-		  <a href="https://journals.plos.org/plosbiology/article?id=10.1371/journal.pbio.3002942" target="_blank" rel="noopener noreferrer">PLOS Biology (2024)</a>
-		</li>
-		<li style="margin-bottom: 20px;">
-		  <strong><u>A spatial expression atlas of the adult human proximal small intestine</u></strong><br>
-		  Yotam Harnik<sup>*</sup>, Oran Yakubovsky<sup>*</sup>, Rouven Hoefflin<sup>*</sup>, <strong>Roy Novoselsky</strong>, Keren Bahar Halpern, Tal Barkai, Yael Korem Kohanim, Adi Egozi, Ofra Golani, Yoseph Addadi, Merav Kedmi, Tal Keidar Haran, Yishai Levin, Alon Savidor, Hadas Keren-Shaul, Chen Mayer, Niv Pencovich, Ron Pery, Dror S. Shouval, Itay Tirosh, Ido Nachmany, Shalev Itzkovitz.<br>
-		  <a href="https://www.nature.com/articles/s41586-024-07793-3" target="_blank" rel="noopener noreferrer">Nature (2024)</a>
-		</li>
-	  </ul>
-	</section>
+  <section id="publications">
+    <h2>Publications</h2>
+    <ul>
+      <li>
+        <div class="pub-title">Subcellular mRNA localization patterns across tissues resolved with spatial transcriptomics.</div>
+        <div class="pub-authors"><strong>Roy Novoselsky</strong><sup>*</sup>, Ofra Golani<sup>*</sup>, Tal Barkai, Merav Kedmi, Inna Goliand, Michal Fine, Ilan Kent, Ido Nachmany, Shalev Itzkovitz.</div>
+        <a class="pub-link badge-natcomms" href="https://www.nature.com/articles/s41467-026-72156-7" target="_blank" rel="noopener noreferrer"><i class="fas fa-external-link-alt"></i> Nature Communications (2026)</a>
+      </li>
+      <li>
+        <div class="pub-title">A spatial atlas of the healthy human liver from live donors.</div>
+        <div class="pub-authors">Oran Yakubovsky, Keren Bahar Halpern, Sapir Shir, <strong>Roy Novoselsky</strong>, Amichay Afriat, Adi Egozi, Tal Barkai, Yotam Harnik, Hoefflin Rouven, Yael Korem Kohanim, Ofra Golani, Inna Goliand, Yoseph Addadi, Merav Kedmi, Hadas Keren-Shaul, Liat Fellus-Alyagor, Lena Prichislov, Dana Hirsch, Chen Mayer, Ron Pery, Niv Pencovich, Timucin Taner, Ido Nachmany, Shalev Itzkovitz.</div>
+        <a class="pub-link badge-nature" href="https://www.nature.com/articles/s41586-026-10377-y" target="_blank" rel="noopener noreferrer"><i class="fas fa-external-link-alt"></i> Nature (2026)</a>
+      </li>
+      <li>
+        <div class="pub-title">A stress-function tradeoff organizes epithelial heterogeneity across spatial scales in the human thyroid.</div>
+        <div class="pub-authors">Yael Korem Kohanim<sup>*</sup>, Tal Barkai<sup>*</sup>, <strong>Roy Novoselsky</strong>, Sapir Shir, Keren Bahar Halpern, Shlomit Reich-Zeliger, Jacob Elkahal, Idit Tessler, Shaked Shivatzki, Ignat Schwartz, Eric Remer, Galit Avior, Rouven Hoefllin, Merav Kedmi, Hadas Keren-Shaul, Inna Goliand, Yoseph Addadi, Ofra Golani, Eran Alon, Shalev Itzkovitz, Ruslan Medzhitov.</div>
+        <a class="pub-link badge-biorxiv" href="https://www.biorxiv.org/content/10.64898/2026.03.12.711294v1" target="_blank" rel="noopener noreferrer"><i class="fas fa-external-link-alt"></i> bioRxiv (2026)</a>
+      </li>
+      <li>
+        <div class="pub-title">Spatial Rewiring of Enterocyte Identity in Celiac Disease.</div>
+        <div class="pub-authors">Tal Barkai, Rachel Frieman-Sharabi, Keren Bahar Halpern, <strong>Roy Novoselsky</strong>, Yael Korem Kohanim, Sapir Shir, Ofra Golani, Inna Goliand, Yoseph Addadi, Merav Kedmi, Hadas Keren-Shaul, Lena Prichislov, Anat Guz-Mark, Hadassah Nissim, Raanan Shamir<sup>*</sup>, Dror Shouval<sup>*</sup>, Shalev Itzkovitz<sup>*</sup>.</div>
+        <a class="pub-link badge-biorxiv" href="https://www.biorxiv.org/content/10.64898/2026.02.14.705877v1" target="_blank" rel="noopener noreferrer"><i class="fas fa-external-link-alt"></i> bioRxiv (2026)</a>
+      </li>
+      <li>
+        <div class="pub-title">Stool shed cell transcriptomics mirrors tumor biology and enables colorectal cancer diagnosis.</div>
+        <div class="pub-authors">Bahar Halpern Keren, Kent Ilan, Yakubovsky Oran, Ben-Moshe Shani, Barkai Tal, Fine Michal, <strong>Novoselsky Roy</strong>, Israeli Alon, Nachmany Ido, Itzkovitz Shalev.</div>
+        <a class="pub-link badge-scirep" href="https://www.nature.com/articles/s41598-025-17411-5" target="_blank" rel="noopener noreferrer"><i class="fas fa-external-link-alt"></i> Scientific Reports (2025)</a>
+      </li>
+      <li>
+        <div class="pub-title">RNA editing deficiency models differential immunogenicity of pancreatic α- and β-cells.</div>
+        <div class="pub-authors">Shani Peleg, Liza Zamashanski, Jonathan Belin, <strong>Roy Novoselsky</strong>, Roni Cohen-Fultheim, Udi Ehud Knebel, Benjamin Glaser, Shalev Itzkovitz, Klaus H. Kaestner, Alvin C. Powers, Erez Y. Levanon, Agnes Klochendler, Yuval Dor.</div>
+        <a class="pub-link badge-molmet" href="https://www.sciencedirect.com/science/article/pii/S2212877825000900" target="_blank" rel="noopener noreferrer"><i class="fas fa-external-link-alt"></i> Molecular Metabolism (2025)</a>
+      </li>
+      <li>
+        <div class="pub-title">Intracellular polarization of RNAs and proteins in the human small intestinal epithelium.</div>
+        <div class="pub-authors"><strong>Roy Novoselsky</strong>, Yotam Harnik, Oran Yakubovsky, Corine Katina, Yishai Levin, Keren Bahar Halpern, Niv Pencovich, Ido Nachmany, Shalev Itzkovitz.</div>
+        <a class="pub-link badge-plos" href="https://journals.plos.org/plosbiology/article?id=10.1371/journal.pbio.3002942" target="_blank" rel="noopener noreferrer"><i class="fas fa-external-link-alt"></i> PLOS Biology (2024)</a>
+      </li>
+      <li>
+        <div class="pub-title">A spatial expression atlas of the adult human proximal small intestine.</div>
+        <div class="pub-authors">Yotam Harnik<sup>*</sup>, Oran Yakubovsky<sup>*</sup>, Rouven Hoefflin<sup>*</sup>, <strong>Roy Novoselsky</strong>, Keren Bahar Halpern, Tal Barkai, Yael Korem Kohanim, Adi Egozi, Ofra Golani, Yoseph Addadi, Merav Kedmi, Tal Keidar Haran, Yishai Levin, Alon Savidor, Hadas Keren-Shaul, Chen Mayer, Niv Pencovich, Ron Pery, Dror S. Shouval, Itay Tirosh, Ido Nachmany, Shalev Itzkovitz.</div>
+        <a class="pub-link badge-nature" href="https://www.nature.com/articles/s41586-024-07793-3" target="_blank" rel="noopener noreferrer"><i class="fas fa-external-link-alt"></i> Nature (2024)</a>
+      </li>
+    </ul>
+  </section>
 
   <section id="contact">
     <h2>Contact</h2>
-    <p>Email: <a href="mailto:roy.novoselsky@weizmann.ac.il">roy.novoselsky@weizmann.ac.il</a></p>
-    <p>Address: Department of Molecular Cell Biology, Weizmann Institute of Science, Rehovot, Israel</p>
+    <div class="contact-card">
+      <div class="contact-row">
+        <i class="fas fa-envelope"></i>
+        <a href="mailto:roy.novoselsky@weizmann.ac.il">roy.novoselsky@weizmann.ac.il</a>
+      </div>
+      <div class="contact-row">
+        <i class="fas fa-map-marker-alt"></i>
+        <span>Department of Molecular Cell Biology, Weizmann Institute of Science, Rehovot, Israel</span>
+      </div>
+    </div>
   </section>
 </main>
 
 <footer>&copy; <span id="year"></span> Roy Novoselsky</footer>
 
 <script>
-  // Auto‑update the footer year
   document.getElementById('year').textContent = new Date().getFullYear();
+
+  // Active nav highlight via IntersectionObserver
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('nav a');
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        navLinks.forEach(a => a.classList.remove('active'));
+        const active = document.querySelector(`nav a[href="#${entry.target.id}"]`);
+        if (active) active.classList.add('active');
+      }
+    });
+  }, { rootMargin: '-40% 0px -55% 0px' });
+  sections.forEach(s => observer.observe(s));
+
+  // Mobile hamburger toggle
+  const hamburger = document.querySelector('.hamburger');
+  const navUl = document.getElementById('nav-links');
+  hamburger.addEventListener('click', () => {
+    const open = navUl.classList.toggle('open');
+    hamburger.classList.toggle('open', open);
+    hamburger.setAttribute('aria-expanded', open);
+  });
+  navUl.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => {
+      navUl.classList.remove('open');
+      hamburger.classList.remove('open');
+      hamburger.setAttribute('aria-expanded', 'false');
+    });
+  });
 </script>
 
 </body>
