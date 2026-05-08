@@ -256,10 +256,15 @@
     .pub-inner {
       display: flex;
       gap: 1.25rem;
-      align-items: flex-start;
+      align-items: stretch;
     }
 
-    .pub-content { flex: 1; min-width: 0; }
+    .pub-content {
+      flex: 1;
+      min-width: 0;
+      display: flex;
+      flex-direction: column;
+    }
 
     .pub-img-wrap {
       display: flex;
@@ -278,10 +283,12 @@
     }
 
     .pub-img-legend {
+      display: block;
       font-size: 0.75rem;
       color: var(--text-muted);
       max-width: 220px;
       line-height: 1.4;
+      font-style: italic;
     }
 
     @media (max-width: 600px) {
@@ -302,6 +309,7 @@
       color: var(--text-muted);
       margin-bottom: 0.6rem;
       line-height: 1.55;
+      flex: 1;
     }
 
     .pub-authors strong {
