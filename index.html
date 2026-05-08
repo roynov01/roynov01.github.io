@@ -332,6 +332,29 @@
 
     .pub-link:hover { filter: brightness(0.92); }
 
+    .pub-extra-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.35rem;
+      margin-bottom: 0.45rem;
+    }
+
+    .pub-extra-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      font-size: 0.8rem;
+      font-weight: 500;
+      padding: 0.2rem 0.55rem;
+      border-radius: 0.4rem;
+      text-decoration: none;
+      background: #f1f5f9;
+      color: #475569;
+      transition: background 0.15s;
+    }
+
+    .pub-extra-link:hover { background: #e2e8f0; }
+
     .badge-nature   { background: #fef3c7; color: #92400e; }
     .badge-natcomms { background: #ecfdf5; color: #065f46; }
     .badge-plos     { background: #f5f3ff; color: #5b21b6; }
@@ -504,12 +527,25 @@
         <img src="images/${imgFile}" alt="" class="pub-img">
         ${legend ? `<span class="pub-img-legend">${legend}</span>` : ''}
       </div>` : '';
+
+    const extraLinks = row.additional_links && row.additional_links.trim()
+      ? `<div class="pub-extra-links">${
+          row.additional_links.trim().split('|').map(entry => {
+            const sep = entry.indexOf('::');
+            const label = entry.slice(0, sep).trim();
+            const url   = entry.slice(sep + 2).trim();
+            return `<a class="pub-extra-link" href="${url}" target="_blank" rel="noopener noreferrer"><i class="fas fa-external-link-alt"></i> ${label}</a>`;
+          }).join('')
+        }</div>`
+      : '';
+
     return `
       <li>
         <div class="pub-inner">
           <div class="pub-content">
             <div class="pub-title">${row.title}</div>
             <div class="pub-authors">${formatAuthors(row.authors)}</div>
+            ${extraLinks}
             <a class="pub-link ${badgeClass(row.journal)}"
                href="${row.paper_url}" target="_blank" rel="noopener noreferrer">
               <i class="fas fa-external-link-alt"></i> ${row.journal} (${row.year})
