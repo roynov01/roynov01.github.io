@@ -387,6 +387,92 @@
     .badge-scirep   { background: #f0fdf4; color: #166534; }
     .badge-molmet   { background: #fdf4ff; color: #7e22ce; }
 
+    /* ── Gallery ── */
+    .gallery-wrapper {
+      position: relative;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .gallery-track-container {
+      overflow: hidden;
+      flex: 1;
+    }
+
+    .gallery-track {
+      display: flex;
+      gap: 1rem;
+      transition: transform 0.4s ease;
+      will-change: transform;
+    }
+
+    .gallery-item {
+      flex-shrink: 0;
+      width: 280px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .gallery-img {
+      width: 280px;
+      height: 280px;
+      object-fit: cover;
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      background: var(--border);
+    }
+
+    .gallery-caption {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      text-align: center;
+      margin-top: 0.6rem;
+      font-style: italic;
+      line-height: 1.4;
+      max-width: 280px;
+    }
+
+    .gallery-arrow {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 50%;
+      width: 2.75rem;
+      height: 2.75rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      flex-shrink: 0;
+      color: var(--text);
+      font-size: 0.95rem;
+      transition: background 0.15s, border-color 0.15s, color 0.15s, opacity 0.15s;
+      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+    }
+
+    .gallery-arrow:hover:not(:disabled) {
+      background: #eff6ff;
+      border-color: var(--primary);
+      color: var(--primary);
+    }
+
+    .gallery-arrow:disabled {
+      opacity: 0.3;
+      cursor: default;
+      pointer-events: none;
+    }
+
+    .gallery-empty {
+      color: var(--text-muted);
+      font-style: italic;
+      font-size: 0.95rem;
+    }
+
+    html[data-theme="dark"] .gallery-arrow:hover:not(:disabled) {
+      background: #1e3a5f;
+    }
+
     /* ── Contact ── */
     .contact-card {
       background: var(--surface);
@@ -491,6 +577,7 @@
       <ul id="nav-links">
         <li><a href="#about">About</a></li>
         <li><a href="#publications">Publications</a></li>
+        <li><a href="#gallery">Gallery</a></li>
         <li><a href="#contact">Contact</a></li>
       </ul>
       <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode" title="Toggle dark mode">
@@ -526,6 +613,21 @@
   <section id="publications">
     <h2>Publications</h2>
     <ul id="pub-list"></ul>
+  </section>
+
+  <section id="gallery">
+    <h2>Gallery</h2>
+    <div class="gallery-wrapper">
+      <button class="gallery-arrow" id="gallery-prev" aria-label="Previous image" disabled>
+        <i class="fas fa-chevron-left"></i>
+      </button>
+      <div class="gallery-track-container">
+        <div class="gallery-track" id="gallery-track"></div>
+      </div>
+      <button class="gallery-arrow" id="gallery-next" aria-label="Next image" disabled>
+        <i class="fas fa-chevron-right"></i>
+      </button>
+    </div>
   </section>
 
   <section id="contact">
@@ -660,6 +762,74 @@
         </div>
       </li>`;
   }
+
+  // ── Gallery: load from CSV ──
+  const GALLERY_ITEM_WIDTH = 280;
+  const GALLERY_GAP = 16;
+  const GALLERY_STEP = GALLERY_ITEM_WIDTH + GALLERY_GAP;
+
+  let galleryIndex = 0;
+  let galleryCount = 0;
+
+  function visibleCount() {
+    const container = document.getElementById('gallery-track').parentElement;
+    return Math.max(1, Math.floor((container.clientWidth + GALLERY_GAP) / GALLERY_STEP));
+  }
+
+  function updateGalleryArrows() {
+    const maxIndex = Math.max(0, galleryCount - visibleCount());
+    document.getElementById('gallery-prev').disabled = galleryIndex <= 0;
+    document.getElementById('gallery-next').disabled = galleryIndex >= maxIndex;
+  }
+
+  fetch('gallery.csv?v=' + Date.now())
+    .then(r => r.text())
+    .then(csv => {
+      const { data } = Papa.parse(csv, { header: true, skipEmptyLines: true });
+      const track = document.getElementById('gallery-track');
+      const container = track.parentElement;
+
+      if (!data.length) {
+        container.innerHTML = '<p class="gallery-empty">No gallery images yet — check back soon.</p>';
+        return;
+      }
+
+      galleryCount = data.length;
+      track.innerHTML = data.map(row => {
+        const filename = (row.filename || '').trim();
+        const desc = (row.description || '').trim();
+        return `
+          <div class="gallery-item">
+            <img src="gallery/${filename}" alt="${desc}" class="gallery-img">
+            ${desc ? `<p class="gallery-caption">${desc}</p>` : ''}
+          </div>`;
+      }).join('');
+
+      updateGalleryArrows();
+    })
+    .catch(() => {
+      document.getElementById('gallery-track').parentElement.innerHTML =
+        '<p class="gallery-empty">Gallery images coming soon.</p>';
+    });
+
+  document.getElementById('gallery-prev').addEventListener('click', () => {
+    if (galleryIndex > 0) {
+      galleryIndex--;
+      document.getElementById('gallery-track').style.transform = `translateX(-${galleryIndex * GALLERY_STEP}px)`;
+      updateGalleryArrows();
+    }
+  });
+
+  document.getElementById('gallery-next').addEventListener('click', () => {
+    const maxIndex = Math.max(0, galleryCount - visibleCount());
+    if (galleryIndex < maxIndex) {
+      galleryIndex++;
+      document.getElementById('gallery-track').style.transform = `translateX(-${galleryIndex * GALLERY_STEP}px)`;
+      updateGalleryArrows();
+    }
+  });
+
+  window.addEventListener('resize', updateGalleryArrows);
 
   fetch('publications.csv?v=' + Date.now())
     .then(r => r.text())
