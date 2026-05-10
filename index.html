@@ -718,12 +718,21 @@
   }
 
   function formatAuthors(str) {
-    // Bold Roy's name in either name order
-    str = str.replace(/Roy Novoselsky/g,  '<strong>Roy Novoselsky</strong>');
-    str = str.replace(/Novoselsky Roy/g,  '<strong>Novoselsky Roy</strong>');
-    // Convert all * markers to superscripts
-    str = str.replace(/\*/g, '<sup>*</sup>');
-    return str;
+    return str.split(',').map(author => {
+      const hasRoy = /\bRoy\b/.test(author);
+      const cleanAuthor = author.replace(/\*/g, '').trim();
+      const parts = cleanAuthor.split(/\s+/).filter(Boolean);
+
+      if (!parts.length) return '';
+
+      const familyName = parts[parts.length - 1];
+      const givenInitials = parts.slice(0, -1).map(part => `${part[0]}.`).join(' ');
+      const shortened = givenInitials ? `${familyName} ${givenInitials}` : familyName;
+      const starred = author.replace(/[^*]+/g, '').trim() ? `${shortened}${author.match(/\*/g).join('')}` : shortened;
+      const withSuperscripts = starred.replace(/\*/g, '<sup>*</sup>');
+
+      return hasRoy ? `<strong>${withSuperscripts}</strong>` : withSuperscripts;
+    }).join(', ');
   }
 
   function renderPub(row) {
