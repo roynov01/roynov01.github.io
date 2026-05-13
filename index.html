@@ -328,6 +328,13 @@
       color: var(--text);
     }
 
+    .pub-subtitle {
+      font-size: 0.98rem;
+      margin: 0.6rem 0 0.3rem;
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+
     .pub-authors {
       font-size: 0.95rem;
       color: var(--text-muted);
@@ -409,15 +416,16 @@
 
     .gallery-item {
       flex-shrink: 0;
-      width: 280px;
+      width: min(280px, 100%);
       display: flex;
       flex-direction: column;
       align-items: center;
     }
 
     .gallery-img {
-      width: 280px;
-      height: 280px;
+      width: 100%;
+      height: auto;
+      aspect-ratio: 1 / 1;
       object-fit: cover;
       border-radius: var(--radius);
       border: 1px solid var(--border);
@@ -431,7 +439,7 @@
       margin-top: 0.6rem;
       font-style: italic;
       line-height: 1.4;
-      max-width: 280px;
+      max-width: min(280px, 100%);
     }
 
     .gallery-arrow {
@@ -472,6 +480,19 @@
     html[data-theme="dark"] .gallery-arrow:hover:not(:disabled) {
       background: #1e3a5f;
     }
+
+    @media (max-width: 600px) {
+      .pub-inner { flex-direction: column; }
+      .pub-img { width: 100%; height: auto; aspect-ratio: 1 / 1; }
+      .pub-img-legend { max-width: 100%; }
+      .gallery-item { width: 100%; }
+      .gallery-img { width: 100%; height: auto; object-fit: contain; }
+      .gallery-caption { max-width: 100%; padding: 0 0.5rem; box-sizing: border-box; }
+    }
+
+    .mobile-gallery-fix .gallery-item { width: 100% !important; }
+    .mobile-gallery-fix .gallery-img { object-fit: contain !important; width: 100% !important; height: auto !important; }
+    .mobile-gallery-fix .gallery-caption { max-width: 100% !important; padding: 0 0.5rem !important; box-sizing: border-box !important; }
 
     /* ── Contact ── */
     .contact-card {
@@ -612,7 +633,10 @@
 
   <section id="publications">
     <h2>Publications</h2>
-    <ul id="pub-list"></ul>
+    <h3 class="pub-subtitle">Main publications</h3>
+    <ul id="pub-main-list" class="pub-list"></ul>
+    <h3 class="pub-subtitle">Additional publications</h3>
+    <ul id="pub-add-list" class="pub-list"></ul>
   </section>
 
   <section id="gallery">
@@ -775,14 +799,16 @@
   // ── Gallery: load from CSV ──
   const GALLERY_ITEM_WIDTH = 280;
   const GALLERY_GAP = 16;
-  const GALLERY_STEP = GALLERY_ITEM_WIDTH + GALLERY_GAP;
 
   let galleryIndex = 0;
   let galleryCount = 0;
 
   function visibleCount() {
     const container = document.getElementById('gallery-track').parentElement;
-    return Math.max(1, Math.floor((container.clientWidth + GALLERY_GAP) / GALLERY_STEP));
+    const item = document.querySelector('.gallery-item');
+    const itemWidth = item ? item.clientWidth : GALLERY_ITEM_WIDTH;
+    const step = itemWidth + GALLERY_GAP;
+    return Math.max(1, Math.floor((container.clientWidth + GALLERY_GAP) / step));
   }
 
   function updateGalleryArrows() {
@@ -824,7 +850,9 @@
   document.getElementById('gallery-prev').addEventListener('click', () => {
     if (galleryIndex > 0) {
       galleryIndex--;
-      document.getElementById('gallery-track').style.transform = `translateX(-${galleryIndex * GALLERY_STEP}px)`;
+      const item = document.querySelector('.gallery-item');
+      const step = (item ? item.clientWidth : GALLERY_ITEM_WIDTH) + GALLERY_GAP;
+      document.getElementById('gallery-track').style.transform = `translateX(-${galleryIndex * step}px)`;
       updateGalleryArrows();
     }
   });
@@ -833,19 +861,34 @@
     const maxIndex = Math.max(0, galleryCount - visibleCount());
     if (galleryIndex < maxIndex) {
       galleryIndex++;
-      document.getElementById('gallery-track').style.transform = `translateX(-${galleryIndex * GALLERY_STEP}px)`;
+      const item = document.querySelector('.gallery-item');
+      const step = (item ? item.clientWidth : GALLERY_ITEM_WIDTH) + GALLERY_GAP;
+      document.getElementById('gallery-track').style.transform = `translateX(-${galleryIndex * step}px)`;
       updateGalleryArrows();
     }
   });
 
   window.addEventListener('resize', updateGalleryArrows);
 
+  function applyMobileGalleryFix() {
+    if (window.innerWidth <= 600) {
+      document.documentElement.classList.add('mobile-gallery-fix');
+    } else {
+      document.documentElement.classList.remove('mobile-gallery-fix');
+    }
+  }
+  applyMobileGalleryFix();
+  window.addEventListener('resize', () => { applyMobileGalleryFix(); updateGalleryArrows(); });
+
   fetch('publications.csv?v=' + Date.now())
     .then(r => r.text())
     .then(csv => {
       const { data } = Papa.parse(csv, { header: true, skipEmptyLines: true });
       data.sort((a, b) => (parseInt(b.main) || 0) - (parseInt(a.main) || 0));
-      document.getElementById('pub-list').innerHTML = data.map(renderPub).join('');
+      const main = data.filter(r => parseInt(r.main) === 1);
+      const additional = data.filter(r => parseInt(r.main) !== 1);
+      document.getElementById('pub-main-list').innerHTML = main.map(renderPub).join('');
+      document.getElementById('pub-add-list').innerHTML = additional.map(renderPub).join('');
     });
 </script>
 
